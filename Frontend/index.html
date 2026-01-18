@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Container-Based Cloud Resource Management | Kubernetes Platform</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg">
+</head>
+<body>
+  
+  <!-- ================================================
+       NAVIGATION BAR
+       ================================================ -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes">
+        <span>K8s Manager</span>
+      </a>
+      
+      <ul class="navbar-nav">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#technology">Technology</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="login.html" class="btn btn-primary btn-sm">Get Started</a></li>
+      </ul>
+      
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ================================================
+       HERO SECTION
+       ================================================ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Container-Based Cloud Resource Management</h1>
+        <p>Monitor, allocate, scale, and optimize Kubernetes resources in real time. Empower your DevOps team with enterprise-grade cloud infrastructure management.</p>
+        
+        <div class="hero-buttons">
+          <a href="login.html" class="btn btn-primary">Get Started Free</a>
+          <a href="dashboard.html" class="btn btn-secondary">View Demo Dashboard</a>
+        </div>
+      </div>
+      
+      <div class="hero-image">
+        <img src="https://cdn-icons-png.flaticon.com/512/1183/1183672.png" alt="Kubernetes Cluster Illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FEATURES SECTION
+       ================================================ -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Enterprise-Grade Features</h2>
+        <p>Everything you need to manage your Kubernetes infrastructure efficiently</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/4149/4149677.png" alt="Cloud">
+          </div>
+          <h3>Real-Time Monitoring</h3>
+          <p>Track CPU, memory, storage, and network metrics across all your clusters with real-time visualization and alerts.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/4248/4248443.png" alt="Server">
+          </div>
+          <h3>Auto-Scaling</h3>
+          <p>Automatically scale your workloads based on demand with intelligent resource allocation and optimization algorithms.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Monitoring">
+          </div>
+          <h3>Advanced Analytics</h3>
+          <p>Deep insights into resource utilization, cost analysis, and performance trends with customizable dashboards.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Alerts">
+          </div>
+          <h3>Smart Alerts</h3>
+          <p>Proactive notifications for resource bottlenecks, pod failures, and critical system events via multiple channels.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       KUBERNETES WORKFLOW SECTION
+       ================================================ -->
+  <section id="workflow" class="container" style="padding: 5rem 2rem;">
+    <div class="section-title">
+      <h2>How It Works</h2>
+      <p>Three simple steps to transform your cloud infrastructure management</p>
+    </div>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-icon">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Connect">
+        </div>
+        <div class="timeline-content">
+          <h3>1. Connect Your Clusters</h3>
+          <p>Seamlessly integrate with existing Kubernetes clusters on AWS, GCP, Azure, or on-premise infrastructure. One-click setup with secure authentication.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Monitor">
+        </div>
+        <div class="timeline-content">
+          <h3>2. Monitor & Analyze</h3>
+          <p>Gain instant visibility into all resources with comprehensive dashboards. Track performance metrics, identify bottlenecks, and optimize resource allocation.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Optimize">
+        </div>
+        <div class="timeline-content">
+          <h3>3. Optimize & Scale</h3>
+          <p>Implement automated scaling policies, set resource quotas, and manage RBAC roles. Reduce costs while maintaining peak performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       TECHNOLOGY STACK SECTION
+       ================================================ -->
+  <section id="technology" class="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Built on Industry Standards</h2>
+        <p>Powered by cutting-edge container orchestration technology</p>
+      </div>
+      
+      <div class="grid grid-2" style="max-width: 800px; margin: 0 auto;">
+        <div class="card" style="text-align: center; padding: 3rem;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes" style="width: 120px; height: 120px; margin: 0 auto 1.5rem;">
+          <h3>Kubernetes</h3>
+          <p>Container orchestration at scale</p>
+        </div>
+        
+        <div class="card" style="text-align: center; padding: 3rem;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Docker_%28container_engine%29_logo.svg" alt="Docker" style="width: 120px; height: 120px; margin: 0 auto 1.5rem;">
+          <h3>Docker</h3>
+          <p>Containerization excellence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       TESTIMONIALS SECTION
+       ================================================ -->
+  <section id="testimonials" class="container" style="padding: 5rem 2rem;">
+    <div class="section-title">
+      <h2>Trusted by DevOps Teams</h2>
+      <p>See what engineering leaders say about our platform</p>
+    </div>
+    
+    <div class="grid grid-3">
+      <div class="card">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <img src="https://i.pravatar.cc/60?img=1" alt="User" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div>
+            <h4 style="margin: 0;">Sarah Chen</h4>
+            <p style="margin: 0; font-size: 0.875rem; color: var(--text-tertiary);">DevOps Lead @ TechCorp</p>
+          </div>
+        </div>
+        <p>"This platform reduced our cloud costs by 40% while improving application performance. The real-time monitoring is a game-changer."</p>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <img src="https://i.pravatar.cc/60?img=3" alt="User" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div>
+            <h4 style="margin: 0;">Michael Rodriguez</h4>
+            <p style="margin: 0; font-size: 0.875rem; color: var(--text-tertiary);">CTO @ StartupXYZ</p>
+          </div>
+        </div>
+        <p>"The auto-scaling features are incredibly intelligent. We handle traffic spikes effortlessly without manual intervention."</p>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <img src="https://i.pravatar.cc/60?img=5" alt="User" style="width: 60px; height: 60px; border-radius: 50%;">
+          <div>
+            <h4 style="margin: 0;">Emily Patel</h4>
+            <p style="margin: 0; font-size: 0.875rem; color: var(--text-tertiary);">Platform Engineer @ CloudNet</p>
+          </div>
+        </div>
+        <p>"Best Kubernetes management tool we've used. The UI is intuitive and the analytics provide actionable insights."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       CTA SECTION
+       ================================================ -->
+  <section class="hero" style="padding: 4rem 0;">
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <h2 style="font-size: 2.5rem;">Ready to Transform Your Cloud Infrastructure?</h2>
+        <p>Join thousands of teams managing their Kubernetes clusters with confidence</p>
+        
+        <div class="hero-buttons">
+          <a href="login.html" class="btn btn-primary">Start Free Trial</a>
+          <a href="dashboard.html" class="btn btn-secondary">Explore Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       FOOTER
+       ================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="monitoring.html">Monitoring</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Compliance</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kubernetes Cloud Manager. All rights reserved. Built with ❤️ for DevOps teams.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

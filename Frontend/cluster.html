@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cluster Details | Kubernetes Cloud Manager</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg">
+</head>
+<body>
+  
+  <div class="dashboard-layout">
+    
+    <!-- ================================================
+         SIDEBAR NAVIGATION
+         ================================================ -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes">
+        <h3>K8s Manager</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="cluster.html" class="active">
+              <img src="https://cdn-icons-png.flaticon.com/512/4248/4248443.png" alt="Clusters">
+              <span>Clusters</span>
+            </a>
+          </li>
+          <li>
+            <a href="monitoring.html">
+              <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Monitoring">
+              <span>Monitoring</span>
+            </a>
+          </li>
+          <li>
+            <a href="alerts.html">
+              <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Alerts">
+              <span>Alerts & Logs</span>
+            </a>
+          </li>
+          <li>
+            <a href="settings.html">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m-9-9h6m6 0h6"></path>
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- ================================================
+         MAIN CONTENT AREA
+         ================================================ -->
+    <main class="main-content">
+      
+      <!-- Top Navbar -->
+      <div class="top-navbar">
+        <div class="search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" placeholder="Search nodes, pods..." onkeypress="handleSearch(event)">
+        </div>
+        
+        <div class="top-navbar-actions">
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+          
+          <div class="notification-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-badge">3</span>
+          </div>
+          
+          <div class="user-profile" onclick="toggleDropdown('user-dropdown')">
+            <img src="https://i.pravatar.cc/100?img=12" alt="User" class="user-avatar">
+            <div class="user-info">
+              <div class="user-name">Admin User</div>
+              <div class="user-role">Cluster Admin</div>
+            </div>
+            
+            <div id="user-dropdown" class="dropdown-menu">
+              <a href="#">Profile Settings</a>
+              <a href="#">Billing</a>
+              <a href="#">API Keys</a>
+              <div class="dropdown-divider"></div>
+              <a href="index.html">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Content Area -->
+      <div class="content-area">
+        
+        <!-- Cluster Summary Banner -->
+        <div class="card" style="margin-bottom: 2rem; background: var(--accent-gradient); color: white; border: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+            <div>
+              <h2 style="color: white; margin-bottom: 0.5rem;">Production Cluster - US-West-2</h2>
+              <p style="margin: 0; opacity: 0.9;">Kubernetes v1.28.3 • 3 Nodes • 24 Pods Running</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+              <button class="btn btn-secondary" onclick="showToast('Refresh', 'Cluster data refreshed', 'success')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                </svg>
+                Refresh
+              </button>
+              <button class="btn" style="background: white; color: var(--accent-primary);" onclick="showToast('Settings', 'Opening cluster settings', 'info')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M12 1v6m0 6v6m-9-9h6m6 0h6"></path>
+                </svg>
+                Configure
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom: 1.5rem;">Node Status</h3>
+        
+        <!-- Node Cards Grid -->
+        <div class="grid grid-3" style="margin-bottom: 3rem;">
+          <div class="card" data-node="node-1">
+            <div class="card-header">
+              <div>
+                <h4 style="margin: 0;">Node-1</h4>
+                <p style="margin: 0; font-size: 0.875rem; color: var(--text-tertiary);">Master Node</p>
+              </div>
+              <span class="badge badge-success">Healthy</span>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">CPU</span>
+                  <strong>45%</strong>
+                </div>
+                <div style="background: var(--bg-secondary); height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div style="width: 45%; height: 100%; background: var(--accent-gradient);"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">Memory</span>
+                  <strong>62%</strong>
+                </div>
+                <div style="background: var(--bg-secondary); height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div style="width: 62%; height: 100%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                  <span style="color: var(--text-secondary); font-size: 0.875rem;">Pods: 8</span>
+                  <span style="color: var(--text-secondary); font-size: 0.875rem;">Uptime: 45d</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card" data-node="node-2">
+            <div class="card-header">
+              <div>
+                <h4 style="margin: 0;">Node-2</h4>
+                <p style="margin: 0; font-size: 0.875rem; color: var(--text-tertiary);">Worker Node</p>
+              </div>
+              <span class="badge badge-success">Healthy</span>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">CPU</span>
+                  <strong>72%</strong>
+                </div>
+                <div style="background: var(--bg-secondary); height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div style="width: 72%; height: 100%; background: var(--accent-gradient);"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">Memory</span>
+                  <strong>78%</strong>
+                </div>
+                <div style="background: var(--bg-secondary); height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div style="width: 78%; height: 100%; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                  <span style="color: var(--text-secondary); font-size: 0.875rem;">Pods: 10</span>
+                  <span style="color: var(--text-secondary); font-size: 0.875rem;">Uptime: 45d</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card" data-node="node-3">
+            <div class="card-header">
+              <div>
+                <h4 style="margin: 0;">Node-3</h4>
+                <p style="margin: 0; font-size: 0.875rem; color: var(--text-tertiary);">Worker Node</p>
+              </div>
+              <span class="badge badge-warning">Warning</span>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">CPU</span>
+                  <strong>88%</strong>
+                </div>
+                <div style="background: var(--bg-secondary); height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div style="width: 88%; height: 100%; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--text-secondary);">Memory</span>
+                  <strong>85%</strong>
+                </div>
+                <div style="background: var(--bg-secondary); height: 8px; border-radius: 4px; overflow: hidden;">
+                  <div style="width: 85%; height: 100%; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);"></div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                  <span style="color: var(--text-secondary); font-size: 0.875rem;">Pods: 6</span>
+                  <span style="color: var(--text-secondary); font-size: 0.875rem;">Uptime: 45d</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom: 1.5rem;">Pod Status Heatmap</h3>
+        
+        <!-- Pod Heatmap -->
+        <div class="card" style="margin-bottom: 3rem;">
+          <div class="heatmap">
+            <div class="heatmap-cell healthy" title="api-service-1">A1</div>
+            <div class="heatmap-cell healthy" title="api-service-2">A2</div>
+            <div class="heatmap-cell healthy" title="frontend-1">F1</div>
+            <div class="heatmap-cell healthy" title="frontend-2">F2</div>
+            <div class="heatmap-cell warning" title="worker-1">W1</div>
+            <div class="heatmap-cell healthy" title="worker-2">W2</div>
+            <div class="heatmap-cell healthy" title="cache-1">C1</div>
+            <div class="heatmap-cell healthy" title="cache-2">C2</div>
+            <div class="heatmap-cell healthy" title="db-1">D1</div>
+            <div class="heatmap-cell healthy" title="db-2">D2</div>
+            
+            <div class="heatmap-cell healthy" title="monitor-1">M1</div>
+            <div class="heatmap-cell healthy" title="monitor-2">M2</div>
+            <div class="heatmap-cell critical" title="backup-1">B1</div>
+            <div class="heatmap-cell healthy" title="backup-2">B2</div>
+            <div class="heatmap-cell healthy" title="queue-1">Q1</div>
+            <div class="heatmap-cell healthy" title="queue-2">Q2</div>
+            <div class="heatmap-cell healthy" title="ingress-1">I1</div>
+            <div class="heatmap-cell healthy" title="ingress-2">I2</div>
+            <div class="heatmap-cell healthy" title="proxy-1">P1</div>
+            <div class="heatmap-cell warning" title="proxy-2">P2</div>
+            
+            <div class="heatmap-cell healthy" title="auth-1">U1</div>
+            <div class="heatmap-cell healthy" title="auth-2">U2</div>
+            <div class="heatmap-cell healthy" title="search-1">S1</div>
+            <div class="heatmap-cell healthy" title="search-2">S2</div>
+          </div>
+          
+          <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div style="width: 16px; height: 16px; background: var(--status-success); border-radius: 4px;"></div>
+              <span style="font-size: 0.875rem; color: var(--text-secondary);">Healthy (21)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div style="width: 16px; height: 16px; background: var(--status-warning); border-radius: 4px;"></div>
+              <span style="font-size: 0.875rem; color: var(--text-secondary);">Warning (2)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <div style="width: 16px; height: 16px; background: var(--status-error); border-radius: 4px;"></div>
+              <span style="font-size: 0.875rem; color: var(--text-secondary);">Critical (1)</span>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="margin-bottom: 1.5rem;">Cluster Actions</h3>
+        
+        <!-- Action Buttons -->
+        <div class="grid grid-3">
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <img src="https://cdn-icons-png.flaticon.com/512/4248/4248443.png" alt="Scale" style="width: 64px; height: 64px; margin: 0 auto 1rem;">
+            <h4>Scale Deployment</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Adjust replica count for workloads</p>
+            <button class="btn btn-primary w-100" onclick="scaleDeployment('production-api')">
+              Scale Now
+            </button>
+          </div>
+          
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" style="margin: 0 auto 1rem;">
+              <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+            </svg>
+            <h4>Restart Pod</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Force restart problematic pods</p>
+            <button class="btn btn-primary w-100" onclick="restartPod('backup-service-6i5j4k')">
+              Restart Failed Pods
+            </button>
+          </div>
+          
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" style="margin: 0 auto 1rem;">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+            </svg>
+            <h4>Apply Limits</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Set resource quotas and limits</p>
+            <button class="btn btn-primary w-100" onclick="applyLimits('CPU/Memory')">
+              Configure Limits
+            </button>
+          </div>
+        </div>
+        
+      </div>
+      
+    </main>
+    
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

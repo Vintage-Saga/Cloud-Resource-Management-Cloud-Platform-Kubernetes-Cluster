@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | Kubernetes Cloud Manager</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg">
+</head>
+<body>
+  
+  <div class="dashboard-layout">
+    
+    <!-- ================================================
+         SIDEBAR NAVIGATION
+         ================================================ -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes">
+        <h3>K8s Manager</h3>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="dashboard.html">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="cluster.html">
+              <img src="https://cdn-icons-png.flaticon.com/512/4248/4248443.png" alt="Clusters">
+              <span>Clusters</span>
+            </a>
+          </li>
+          <li>
+            <a href="monitoring.html">
+              <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Monitoring">
+              <span>Monitoring</span>
+            </a>
+          </li>
+          <li>
+            <a href="alerts.html">
+              <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Alerts">
+              <span>Alerts & Logs</span>
+            </a>
+          </li>
+          <li>
+            <a href="settings.html" class="active">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 1v6m0 6v6m-9-9h6m6 0h6"></path>
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- ================================================
+         MAIN CONTENT AREA
+         ================================================ -->
+    <main class="main-content">
+      
+      <!-- Top Navbar -->
+      <div class="top-navbar">
+        <div class="search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" placeholder="Search settings..." onkeypress="handleSearch(event)">
+        </div>
+        
+        <div class="top-navbar-actions">
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <span id="theme-icon">☀️</span>
+          </button>
+          
+          <div class="notification-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-badge">3</span>
+          </div>
+          
+          <div class="user-profile" onclick="toggleDropdown('user-dropdown')">
+            <img src="https://i.pravatar.cc/100?img=12" alt="User" class="user-avatar">
+            <div class="user-info">
+              <div class="user-name">Admin User</div>
+              <div class="user-role">Cluster Admin</div>
+            </div>
+            
+            <div id="user-dropdown" class="dropdown-menu">
+              <a href="#">Profile Settings</a>
+              <a href="#">Billing</a>
+              <a href="#">API Keys</a>
+              <div class="dropdown-divider"></div>
+              <a href="index.html">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Content Area -->
+      <div class="content-area">
+        <div style="margin-bottom: 2rem;">
+          <h2>Cluster Settings</h2>
+          <p style="color: var(--text-secondary); margin: 0;">Configure cluster resources, quotas, and permissions</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+          <div class="tabs-header">
+            <button class="tab-button active" onclick="showTab('cluster-config')">Cluster Configuration</button>
+            <button class="tab-button" onclick="showTab('resource-quotas')">Resource Quotas</button>
+            <button class="tab-button" onclick="showTab('rbac-roles')">RBAC Roles</button>
+            <button class="tab-button" onclick="showTab('theme-settings')">Theme & Preferences</button>
+          </div>
+        </div>
+        
+        <!-- Tab: Cluster Configuration -->
+        <div id="cluster-config" class="tab-content active">
+          <div class="card">
+            <h3>Cluster Information</h3>
+            
+            <form id="cluster-config-form" onsubmit="event.preventDefault(); saveSettings('cluster-config-form');">
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="cluster-name">Cluster Name</label>
+                  <input type="text" id="cluster-name" class="form-input" value="production-cluster-us-west-2" required>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="cluster-region">Region</label>
+                  <select id="cluster-region" class="form-select">
+                    <option>us-west-2</option>
+                    <option>us-east-1</option>
+                    <option>eu-west-1</option>
+                    <option>ap-southeast-1</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="k8s-version">Kubernetes Version</label>
+                  <select id="k8s-version" class="form-select">
+                    <option>v1.28.3 (Current)</option>
+                    <option>v1.28.2</option>
+                    <option>v1.27.5</option>
+                    <option>v1.26.8</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="node-count">Node Count</label>
+                  <input type="number" id="node-count" class="form-input" value="3" min="1" max="100">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="cluster-endpoint">API Server Endpoint</label>
+                <input type="text" id="cluster-endpoint" class="form-input" value="https://k8s-api.production.example.com" readonly>
+              </div>
+              
+              <h4 style="margin-top: 2rem; margin-bottom: 1rem;">Auto-Scaling Configuration</h4>
+              
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label class="form-label">Enable Auto-Scaling</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Enable Cluster Autoscaler</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="min-nodes">Min Nodes</label>
+                  <input type="number" id="min-nodes" class="form-input" value="2" min="1">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="max-nodes">Max Nodes</label>
+                  <input type="number" id="max-nodes" class="form-input" value="10" min="1">
+                </div>
+              </div>
+              
+              <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary">Save Configuration</button>
+                <button type="button" class="btn btn-secondary">Reset to Defaults</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Tab: Resource Quotas -->
+        <div id="resource-quotas" class="tab-content">
+          <div class="card">
+            <h3>Resource Quotas by Namespace</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Set resource limits to prevent overconsumption</p>
+            
+            <form id="quota-form" onsubmit="event.preventDefault(); saveSettings('quota-form');">
+              <!-- Production Namespace -->
+              <div class="card" style="background: var(--bg-secondary); margin-bottom: 1.5rem;">
+                <h4 style="margin-bottom: 1.5rem;">Production Namespace</h4>
+                
+                <div class="grid grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="prod-cpu-request">CPU Request</label>
+                    <input type="text" id="prod-cpu-request" class="form-input" value="4 cores" placeholder="e.g., 4 cores">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="prod-cpu-limit">CPU Limit</label>
+                    <input type="text" id="prod-cpu-limit" class="form-input" value="8 cores" placeholder="e.g., 8 cores">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="prod-memory-request">Memory Request</label>
+                    <input type="text" id="prod-memory-request" class="form-input" value="8 GB" placeholder="e.g., 8 GB">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="prod-memory-limit">Memory Limit</label>
+                    <input type="text" id="prod-memory-limit" class="form-input" value="16 GB" placeholder="e.g., 16 GB">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="prod-pod-limit">Max Pods</label>
+                    <input type="number" id="prod-pod-limit" class="form-input" value="50" min="1">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="prod-storage-limit">Storage Limit</label>
+                    <input type="text" id="prod-storage-limit" class="form-input" value="100 GB" placeholder="e.g., 100 GB">
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Staging Namespace -->
+              <div class="card" style="background: var(--bg-secondary); margin-bottom: 1.5rem;">
+                <h4 style="margin-bottom: 1.5rem;">Staging Namespace</h4>
+                
+                <div class="grid grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="stag-cpu-request">CPU Request</label>
+                    <input type="text" id="stag-cpu-request" class="form-input" value="2 cores">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="stag-cpu-limit">CPU Limit</label>
+                    <input type="text" id="stag-cpu-limit" class="form-input" value="4 cores">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="stag-memory-request">Memory Request</label>
+                    <input type="text" id="stag-memory-request" class="form-input" value="4 GB">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="stag-memory-limit">Memory Limit</label>
+                    <input type="text" id="stag-memory-limit" class="form-input" value="8 GB">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="stag-pod-limit">Max Pods</label>
+                    <input type="number" id="stag-pod-limit" class="form-input" value="25">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="stag-storage-limit">Storage Limit</label>
+                    <input type="text" id="stag-storage-limit" class="form-input" value="50 GB">
+                  </div>
+                </div>
+              </div>
+              
+              <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn btn-primary">Apply Quotas</button>
+                <button type="button" class="btn btn-secondary">Reset to Defaults</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Tab: RBAC Roles -->
+        <div id="rbac-roles" class="tab-content">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+              <div>
+                <h3>Role-Based Access Control</h3>
+                <p style="color: var(--text-secondary); margin: 0;">Manage user roles and permissions</p>
+              </div>
+              <button class="btn btn-primary" onclick="showToast('Create Role', 'Role creation dialog opening...', 'info')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Create Role
+              </button>
+            </div>
+            
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Role Name</th>
+                    <th>Permissions</th>
+                    <th>Namespaces</th>
+                    <th>Users</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>cluster-admin</strong></td>
+                    <td>
+                      <span class="badge badge-success">Full Access</span>
+                    </td>
+                    <td>All</td>
+                    <td>3 users</td>
+                    <td>
+                      <button class="btn btn-sm btn-secondary" onclick="showToast('Edit', 'Editing cluster-admin role', 'info')">Edit</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>developer</strong></td>
+                    <td>
+                      <span class="badge badge-info">Read/Write</span>
+                    </td>
+                    <td>production, staging</td>
+                    <td>12 users</td>
+                    <td>
+                      <button class="btn btn-sm btn-secondary" onclick="showToast('Edit', 'Editing developer role', 'info')">Edit</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>viewer</strong></td>
+                    <td>
+                      <span class="badge badge-warning">Read Only</span>
+                    </td>
+                    <td>All</td>
+                    <td>25 users</td>
+                    <td>
+                      <button class="btn btn-sm btn-secondary" onclick="showToast('Edit', 'Editing viewer role', 'info')">Edit</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>namespace-admin</strong></td>
+                    <td>
+                      <span class="badge badge-info">Namespace Admin</span>
+                    </td>
+                    <td>production</td>
+                    <td>5 users</td>
+                    <td>
+                      <button class="btn btn-sm btn-secondary" onclick="showToast('Edit', 'Editing namespace-admin role', 'info')">Edit</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="card" style="margin-top: 2rem; background: var(--bg-secondary);">
+              <h4 style="margin-bottom: 1rem;">Create Service Account</h4>
+              <form id="service-account-form" onsubmit="event.preventDefault(); saveSettings('service-account-form');">
+                <div class="grid grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="sa-name">Service Account Name</label>
+                    <input type="text" id="sa-name" class="form-input" placeholder="e.g., ci-cd-deployer" required>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="sa-namespace">Namespace</label>
+                    <select id="sa-namespace" class="form-select">
+                      <option>production</option>
+                      <option>staging</option>
+                      <option>development</option>
+                      <option>kube-system</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="sa-role">Assign Role</label>
+                    <select id="sa-role" class="form-select">
+                      <option>cluster-admin</option>
+                      <option>developer</option>
+                      <option>viewer</option>
+                      <option>namespace-admin</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Create Service Account</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tab: Theme & Preferences -->
+        <div id="theme-settings" class="tab-content">
+          <div class="card">
+            <h3>Appearance & Preferences</h3>
+            
+            <form id="theme-form" onsubmit="event.preventDefault(); saveSettings('theme-form');">
+              <h4 style="margin-bottom: 1rem;">Theme</h4>
+              
+              <div class="form-group">
+                <label class="form-label">Color Theme</label>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                  <label class="form-checkbox">
+                    <input type="radio" name="theme" value="dark" checked>
+                    <span>Dark Mode</span>
+                  </label>
+                  <label class="form-checkbox">
+                    <input type="radio" name="theme" value="light">
+                    <span>Light Mode</span>
+                  </label>
+                  <label class="form-checkbox">
+                    <input type="radio" name="theme" value="auto">
+                    <span>Auto (System)</span>
+                  </label>
+                </div>
+              </div>
+              
+              <h4 style="margin: 2rem 0 1rem;">Notifications</h4>
+              
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label class="form-label">Email Notifications</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Push Notifications</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Slack Integration</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">PagerDuty Integration</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+              
+              <h4 style="margin: 2rem 0 1rem;">Alert Thresholds</h4>
+              
+              <div class="grid grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="cpu-threshold">CPU Warning Threshold (%)</label>
+                  <input type="number" id="cpu-threshold" class="form-input" value="85" min="1" max="100">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="memory-threshold">Memory Warning Threshold (%)</label>
+                  <input type="number" id="memory-threshold" class="form-input" value="85" min="1" max="100">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="storage-threshold">Storage Warning Threshold (%)</label>
+                  <input type="number" id="storage-threshold" class="form-input" value="80" min="1" max="100">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="pod-restart-threshold">Pod Restart Alert Threshold</label>
+                  <input type="number" id="pod-restart-threshold" class="form-input" value="3" min="1">
+                </div>
+              </div>
+              
+              <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary">Save Preferences</button>
+                <button type="button" class="btn btn-secondary">Reset to Defaults</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+      
+    </main>
+    
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
