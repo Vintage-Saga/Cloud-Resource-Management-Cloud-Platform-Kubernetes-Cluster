@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resource-backend
+  template:
+    metadata:
+      labels:
+        app: resource-backend
+    spec:
+      containers:
+      - name: backend
+        image: resource-backend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: "200m"
+          limits:
+            cpu: "500m"
